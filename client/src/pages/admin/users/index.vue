@@ -72,7 +72,8 @@
       ];
 
       const deleteUser = (id) =>{
-        axios.delete(`http://127.0.0.1:8000/user/${id}`)
+        axios.delete(`http://127.0.0.1:8000/user/${id}`,{
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
             .then(function (response) {
               if (response.status === 200) {
                 getUsers();
@@ -83,7 +84,8 @@
             })
       }
       const getUsers = () => {
-        axios.get('http://127.0.0.1:8000/user/')
+        axios.get('http://127.0.0.1:8000/user/', {
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
           .then(function (response) {
             users.value = response.data;
           })

@@ -105,7 +105,7 @@ export default defineComponent({
     });
     const createUsers = () =>{
       if(users["password"] === password_confirmation["password_confirmation"]) {
-        axios.post("http://127.0.0.1:8000/user/create", users)
+        axios.post("http://127.0.0.1:8000/user/register", users)
         .then(function (response) {
           if (response) {
             message.success("Tạo mới thành công!");

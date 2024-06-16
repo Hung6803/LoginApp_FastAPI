@@ -21,7 +21,7 @@ const showDrawer = () => {
       <div class="col-3 d-flex align-items-center justify-content-end">
         <a>
           <router-link :to="{name: 'login'}">
-            <span>Đăng xuất</span>
+            <span>Đăng nhập</span>
           </router-link>
         </a>
       </div>

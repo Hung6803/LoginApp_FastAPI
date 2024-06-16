@@ -9,7 +9,8 @@ DATABASE_PASSWORD = config.DATABASE_PASSWORD
 DATABASE_HOST = config.DATABASE_HOST
 DATABASE_NAME = config.DATABASE_NAME
 
-SQLALCHEMY_DATABASE_URL = f'postgresql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}'
+SQLALCHEMY_DATABASE_URL = f'postgresql+psycopg2://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}'
+# postgresql+psycopg2://postgres:postgres@localhost:5432/postgres
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind = engine)

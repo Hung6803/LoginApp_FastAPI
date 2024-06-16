@@ -1,9 +1,6 @@
-from typing import List, Optional, Annotated
-
-from . import models, schema, hashing, validator
-from fastapi import HTTPException, status, Depends
-
-
+from typing import List, Optional
+from login_app.user import models, schema, hashing, validator
+from fastapi import HTTPException, status
 
 
 async def new_user_register(request: schema.User, database) -> models.User:
@@ -50,4 +47,10 @@ def verify_account(email, password, database) -> Optional[models.User]:
     else:
         return user_info
 
-
+def authenticate_user(database, email, password):
+    user = get_user_by_email(email, database)
+    if not user:
+        return False
+    if not hashing.verify_password(password, user.hashed_password):
+        return False
+    return user

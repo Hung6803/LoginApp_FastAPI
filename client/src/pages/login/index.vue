@@ -58,12 +58,13 @@ export default defineComponent({
     const formState = reactive({
       email: '',
       password: '',
-      remember: true,
     });
+
     const router = useRouter();
     const error_password = ref("")
     const error_email = ref("")
     const Login = () =>{
+
       if (formState.email === ""){
         error_email.value = "Vui lòng nhập Email!";
       }
@@ -72,9 +73,13 @@ export default defineComponent({
         error_email.value = "";
       }
       else {
-        axios.get(`http://127.0.0.1:8000/user/login/${formState.email}/${formState.password}`)
+        const params = new URLSearchParams();
+          params.append('username', formState.email);
+          params.append('password', formState.password);
+        axios.post("http://127.0.0.1:8000/user/login", params)
             .then(function (response) {
               if (response.data) {
+                localStorage.setItem('token', response.data.access_token)
                 message.success("Đăng nhập thành công!");
                 router.push({name: 'admin-users'});
               } else{

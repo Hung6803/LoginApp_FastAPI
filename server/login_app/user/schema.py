@@ -1,7 +1,6 @@
 from pydantic import BaseModel, constr, EmailStr
 
 
-
 class User(BaseModel):
     first_name: constr(min_length=1)
     last_name: constr(min_length=1)

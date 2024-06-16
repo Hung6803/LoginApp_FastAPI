@@ -117,7 +117,9 @@ export default defineComponent({
       password: ""
     });
     const getUsersbyID = () =>{
-      axios.get(`http://127.0.0.1:8000/user/${route.params.id}`)
+      console.log({Authorization: `Bearer ${localStorage.getItem('token')}`})
+      axios.get(`http://127.0.0.1:8000/user/${route.params.id}`, {
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
           .then(function (response) {
             console.log(response);
             users.first_name = response.data.first_name;
@@ -131,7 +133,8 @@ export default defineComponent({
     }
     const editUsers = () =>{
       if(users["password"] === password_confirmation["password_confirmation"]) {
-        axios.put(`http://127.0.0.1:8000/user/edit/${route.params.id}`, users)
+        axios.put(`http://127.0.0.1:8000/user/edit/${route.params.id}`, users, {
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(function (response) {
           if (response) {
             message.success("Sửa thông tin thành công!");
